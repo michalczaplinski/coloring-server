@@ -15,8 +15,9 @@ function startServer() {
   });
 
   io.of('/hello').on('connection', function (socket) {
-    socket.on('message', (msg) => {
-      socket.broadcast.send(msg);
+    socket.on('data', (msg) => {
+      console.log(msg);
+      socket.broadcast.emit('data', msg);
     })
   });
 

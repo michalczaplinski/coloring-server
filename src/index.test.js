@@ -29,7 +29,7 @@ test('ws1 sends the message to ws2 & ws3', done => {
     console.error(err);
   });
 
-  ws2.on('message', (msg) => {
+  ws2.on('data', (msg) => {
     expect(msg).toEqual('hello');
     check2 = true;
     if (check2 && check3) {
@@ -37,7 +37,7 @@ test('ws1 sends the message to ws2 & ws3', done => {
     }
   });
 
-  ws3.on('message', (msg) => {
+  ws3.on('data', (msg) => {
     expect(msg).toEqual('hello');
     check3 = true;
     if (check2 && check3) {
@@ -46,7 +46,7 @@ test('ws1 sends the message to ws2 & ws3', done => {
   });
 
   ws1.on('connect', () => {
-    ws1.send('hello');
+    ws1.emit('data', 'hello');
   })
 
 });

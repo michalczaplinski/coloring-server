@@ -17,9 +17,9 @@ test('ws1 sends the message to ws2 & ws3', done => {
   wss = startServer();
   let check2, check3;
 
-  ws1 = io('http://localhost:3344/hello');
-  ws2 = io('http://localhost:3344/hello');
-  ws3 = io('http://localhost:3344/hello');
+  ws1 = io('http://localhost:4444/hello');
+  ws2 = io('http://localhost:4444/hello');
+  ws3 = io('http://localhost:4444/hello');
 
   ws1.on('error', (err) => {
     console.error(err);

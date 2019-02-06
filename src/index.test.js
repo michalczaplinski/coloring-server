@@ -16,9 +16,9 @@ afterAll(() => {
 test('ws1 sends the message to ws2 & ws3', done => {
   let check2, check3;
 
-  ws1 = io('http://localhost:4444/hello');
-  ws2 = io('http://localhost:4444/hello');
-  ws3 = io('http://localhost:4444/hello');
+  ws1 = io('http://localhost:4444/test');
+  ws2 = io('http://localhost:4444/test');
+  ws3 = io('http://localhost:4444/test');
 
   ws1.on('error', (err) => {
     console.error(err);

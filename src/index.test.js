@@ -1,20 +1,19 @@
 const startServer = require('./app.js');
-const WebSocket = require('ws');
 const io = require('socket.io-client');
+const axios = require('axios');
 
 let wss;
 let ws1, ws2, ws3;
 
-beforeEach(() => {
-
+beforeAll(() => {
+  wss = startServer();
 })
 
-afterEach(() => {
+afterAll(() => {
   wss.close();
 })
 
 test('ws1 sends the message to ws2 & ws3', done => {
-  wss = startServer();
   let check2, check3;
 
   ws1 = io('http://localhost:4444/hello');
@@ -49,4 +48,14 @@ test('ws1 sends the message to ws2 & ws3', done => {
     ws1.emit('data', 'hello');
   })
 
+})
+
+test('test getting the random string', done => {
+  axios.get('http://localhost:4444/get-uuid').then(response => {
+    expect(typeof response).toBe('object');
+    expect(response.status).toBe(200);
+    expect(Object.keys(response.data)).toEqual(['uuid']);
+    expect(response.data.uuid.length).toEqual(16);
+    done();
+  })
 });

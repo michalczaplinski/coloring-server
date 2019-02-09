@@ -22,6 +22,7 @@ function startServer() {
     const key = randomize("Aa09", 16);
     createChannel(key);
     res.json({ uuid: key });
+    console.log(key);
   });
 
   app.use((req, res) => {
@@ -36,14 +37,15 @@ function startServer() {
   createChannel("/test");
 
   return io;
-
-  server.
 }
 
 function createChannel(name) {
   io.of(name).on("connect", socket => {
+    console.log(socket.id);
+
     socket.on("data", msg => {
       socket.broadcast.emit("data", msg);
+      console.log(msg);
     });
     socket.on("error", err => {
       Sentry.captureException(err);
